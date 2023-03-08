@@ -15,7 +15,7 @@ export const StyledSidebar = () => {
                     <h2 className='title'>Fit Tracker</h2>
                 </StyledMenuItem>
                 <StyledMenuItem icon={<DashboardOutlined />} component={<Link to="/" />}>Dashboard</StyledMenuItem>
-                <StyledMenuItem icon={<ReceiptOutlined />} component={<Link to="/" />}>Recipes</StyledMenuItem>
+                <StyledMenuItem icon={<ReceiptOutlined />} component={<Link to="/recipe" />}>Recipes</StyledMenuItem>
                 <StyledMenuItem icon={<CalendarMonthOutlined />} component={<Link to="/" />}>Planner</StyledMenuItem>
                 <StyledMenuItem icon={<ShoppingCartOutlined />} component={<Link to="/" />}>Shopping List</StyledMenuItem>
             </Menu>
