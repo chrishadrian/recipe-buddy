@@ -49,9 +49,9 @@ const RecipeList = () => {
           <InstagramEmbed url="https://www.instagram.com/p/CUbHfhpswxt/" width={"90%"} />
         </Box>
         <Box className="w-2/3 max-h-screen">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} height={'40vh'}>
             {filteredRecipes.map((recipe) => (
-              <Grid item xs={12} sm={6} md={4} key={recipe.id}>
+              <Grid item xs={12} sm={6} md={4} key={recipe.id} height={'100%'}>
                 <Card
                   sx={{
                     width: '100%',
@@ -71,7 +71,7 @@ const RecipeList = () => {
                     sx={{
                       objectFit: 'cover',
                       width: '100%',
-                      height: '50%',
+                      height: '70%',
                     }}
                   />
                   <CardContent sx={{height: 0}}>
