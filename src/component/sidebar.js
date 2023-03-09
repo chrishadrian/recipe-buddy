@@ -10,7 +10,8 @@ export const StyledSidebar = () => {
         <Sidebar style={{ height: "100vh" }} backgroundColor="#558B2F">
             <Menu>
                 <StyledMenuItem
-                    icon={<FitbitOutlined />}
+                    icon={<FitbitOutlined fontSize='large'/>}
+                    className="my-3"
                 >
                     <h2 className='title'>Fit Tracker</h2>
                 </StyledMenuItem>
@@ -19,12 +20,13 @@ export const StyledSidebar = () => {
                 <StyledMenuItem icon={<CalendarMonthOutlined />} component={<Link to="/" />}>Planner</StyledMenuItem>
                 <StyledMenuItem icon={<ShoppingCartOutlined />} component={<Link to="/" />}>Shopping List</StyledMenuItem>
             </Menu>
-            <Menu style={{ position: "absolute", bottom: "0", width: "100%", paddingBottom: "5%" }}>
+            <Menu style={{ position: "absolute", bottom: "0", width: "100%" }}>
                 <StyledMenuItem
                     icon={collapsed ? <ArrowCircleRightOutlined /> : <ArrowCircleLeftOutlined />}
                     onClick={() => {
                         collapseSidebar();
                     }}
+                    className="pb-5"
                 >
                     {collapsed ? null : <h2>Collapse</h2>}
                 </StyledMenuItem>
