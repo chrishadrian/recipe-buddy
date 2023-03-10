@@ -3,10 +3,12 @@ import { Box, Card, CardContent, CardMedia, Grid, InputAdornment, TextField, Typ
 import { recipes } from './constant';
 import { Search } from '@mui/icons-material';
 import { InstagramEmbed } from 'react-social-media-embed';
+import { useProSidebar } from 'react-pro-sidebar';
 
 const RecipeList = () => {
   const { palette } = useTheme();
   const [filteredRecipes, setFilteredRecipes] = useState(recipes)
+  const { collapsed } = useProSidebar();
 
   const handleSearchChange = (e) => {
     const searchText = e.target.value
@@ -44,11 +46,11 @@ const RecipeList = () => {
           ),
         }}
       />
-      <Box className="flex my-4">
+      <Box className="flex my-4 max-h-screen">
         <Box className="w-1/3 flex">
-          <InstagramEmbed url="https://www.instagram.com/p/CUbHfhpswxt/" width={"90%"} />
+          <InstagramEmbed url="https://www.instagram.com/p/CUbHfhpswxt/" width={collapsed ? "81%" : "90%"} />
         </Box>
-        <Box className="w-2/3 max-h-screen">
+        <Box className="w-2/3">
           <Grid container spacing={3} height={'40vh'}>
             {filteredRecipes.map((recipe) => (
               <Grid item xs={12} sm={6} md={4} key={recipe.id} height={'100%'}>
@@ -74,7 +76,7 @@ const RecipeList = () => {
                       height: '70%',
                     }}
                   />
-                  <CardContent sx={{height: 0}}>
+                  <CardContent sx={{ height: 0 }}>
                     <Typography
                       variant="h6"
                       component="h2"
@@ -102,27 +104,3 @@ const RecipeList = () => {
 };
 
 export default RecipeList;
-
-{/* <Card sx={{ bgcolor: palette.common.white }}>
-            <CardMedia
-              component="img"
-              height="100px"
-              image={recipe.image}
-              alt={recipe.title}
-            />
-            <CardContent>
-              <Typography
-                variant="h6"
-                component="h2"
-                sx={{ color: `${palette.secondary.main}` }}>
-                {recipe.title}
-              </Typography>
-              <Typography
-                variant="body2"
-                component="p"
-                sx={{ color: `${palette.primary.main}` }}
-              >
-                {recipe.description}
-              </Typography>
-            </CardContent>
-          </Card> */}
