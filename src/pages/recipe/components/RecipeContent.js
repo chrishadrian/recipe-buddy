@@ -9,7 +9,7 @@ export default function RecipeContent(props) {
     return (
         <Box className="flex my-4 h-4/5">
             <Box className="w-1/3 flex">
-                <InstagramEmbed url="https://www.instagram.com/p/Cow-xNgOeni/" width='85%' style={{overflow: 'auto', direction: 'rtl'}}/>
+                <InstagramEmbed url="https://www.instagram.com/p/CGGG-S3p_CB/?hl=en" width='85%' style={{overflow: 'auto', direction: 'rtl'}}/>
             </Box>
             <Box className="w-2/3">
                 <Grid container spacing={3} height={'40vh'}>
