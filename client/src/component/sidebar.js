@@ -10,7 +10,7 @@ export const StyledSidebar = () => {
         <Sidebar style={{ height: "100vh" }} backgroundColor="#558B2F">
             <Menu>
                 <StyledMenuItem
-                    icon={<FitbitOutlined fontSize='large'/>}
+                    icon={<FitbitOutlined fontSize='large' sx={{color: "#85FFBD"}}/>}
                     className="my-3"
                 >
                     <h2 className='title'>Fit Tracker</h2>
