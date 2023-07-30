@@ -1,8 +1,10 @@
-import React from 'react'
+import React from "react";
+import LoginButton from "../component/Login";
 
 export const Dashboard = () => {
-    return (
-        <div>dashboard</div>
-    )
-}
-
+	return (
+		<div>
+			<LoginButton />
+		</div>
+	);
+};
