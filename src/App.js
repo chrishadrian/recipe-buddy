@@ -12,16 +12,25 @@ import Recipe from "./pages/recipe/Recipe";
 import Landing from "./pages/Landing";
 
 function App() {
-	let isLogin = true;
+	let isLogin = false;
 	return (
 		<Router>
 			<div style={{ height: "100vh", display: "flex" }}>
-				{isLogin ? <StyledSidebar /> : <Landing />}
-				<Routes>
-					<Route path="/" element={<Dashboard />} />
-					<Route path="/recipe" element={<Recipe />} />
-					<Route path="*" element={<Navigate replace to="/" />} />
-				</Routes>
+				{isLogin ? (
+					<>
+						<StyledSidebar />
+						<Routes>
+							<Route path="/" element={<Dashboard />} />
+							<Route path="/recipe" element={<Recipe />} />
+							<Route
+								path="*"
+								element={<Navigate replace to="/" />}
+							/>
+						</Routes>
+					</>
+				) : (
+					<Landing />
+				)}
 			</div>
 		</Router>
 	);
