@@ -6,7 +6,7 @@ import {
 	Route,
 	Navigate,
 } from "react-router-dom";
-import { Dashboard } from "./pages/Dashboard";
+import { Dashboard } from "./pages/dashboard/Dashboard";
 import { StyledSidebar } from "./component/Sidebar";
 import Recipe from "./pages/recipe/Recipe";
 import Landing from "./pages/Landing";
