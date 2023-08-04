@@ -13,7 +13,7 @@ export const Dashboard = () => {
 				<Box className="">
 					<RecipeTable />
 				</Box>
-				<Box className="w-1/4">
+				<Box className="w-1/4 max-h-[439px]">
 					<ShoppingList />
 				</Box>
 			</Box>
