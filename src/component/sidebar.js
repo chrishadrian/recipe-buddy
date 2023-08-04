@@ -10,7 +10,7 @@ import {
 	ArrowCircleRightOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { StyledMenuItem } from "./styledMenuItem";
+import { StyledMenuItem } from "./StyledMenuItem";
 
 export function StyledSidebar() {
 	const { collapseSidebar, collapsed } = useProSidebar();
