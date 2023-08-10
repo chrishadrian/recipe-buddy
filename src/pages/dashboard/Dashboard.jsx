@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import RecipeTable from "./components/RecipeTable";
 import ShoppingList from "./components/ShoppingList";
 import React from "react";
+import SignIn from "../../component/SignIn";
 
 export const Dashboard = () => {
 	return (
@@ -16,6 +17,9 @@ export const Dashboard = () => {
 				<Box className="w-1/4 max-h-[439px]">
 					<ShoppingList />
 				</Box>
+			</Box>
+			<Box>
+				<SignIn />
 			</Box>
 		</Box>
 	);
