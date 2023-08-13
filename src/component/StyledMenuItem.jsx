@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import { MenuItem } from "react-pro-sidebar";
+import React, { useState } from 'react';
+import { MenuItem } from 'react-pro-sidebar';
 
-export function StyledMenuItem(props) {
+export default function StyledMenuItem(props) {
 	const [isHovered, setIsHovered] = useState(false);
+	const { children } = props;
 	const menuItemStyle = {
-		color: isHovered ? "#8BC34A" : "white",
+		color: isHovered ? '#8BC34A' : 'white',
 		// backgroundColor: isHovered ? 'black' : 'transparent',
-		cursor: "pointer",
-		margin: "1% 0",
+		cursor: 'pointer',
+		margin: '1% 0',
 	};
 
 	return (
@@ -17,7 +18,7 @@ export function StyledMenuItem(props) {
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 		>
-			{props.children}
+			{children}
 		</MenuItem>
 	);
 }

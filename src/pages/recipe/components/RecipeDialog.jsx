@@ -1,19 +1,12 @@
-import {
-	Button,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogTitle,
-	TextField,
-} from "@mui/material";
-import React, { useState } from "react";
-import { recipes } from "../constant";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import { recipes } from '../constants';
 
-export function RecipeDialog(props) {
+export default function RecipeDialog(props) {
 	const { open, handleClose } = props;
-	const [recipeName, setRecipeName] = useState("");
-	const [recipeDescription, setRecipeDescription] = useState("");
-	const [recipeLink, setRecipeLink] = useState("");
+	const [recipeName, setRecipeName] = useState('');
+	const [recipeDescription, setRecipeDescription] = useState('');
+	const [recipeLink, setRecipeLink] = useState('');
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -32,27 +25,25 @@ export function RecipeDialog(props) {
 				<form onSubmit={handleSubmit}>
 					<TextField
 						autoFocus
-						id="recipe-name"
+						id='recipe-name'
 						label="Recipe's Name"
-						type="text"
+						type='text'
 						value={recipeName}
 						onChange={(event) => setRecipeName(event.target.value)}
 						fullWidth
 					/>
 					<TextField
-						id="recipe-description"
+						id='recipe-description'
 						label="Recipe's Description"
-						type="text"
+						type='text'
 						value={recipeDescription}
-						onChange={(event) =>
-							setRecipeDescription(event.target.value)
-						}
+						onChange={(event) => setRecipeDescription(event.target.value)}
 						fullWidth
 					/>
 					<TextField
-						id="recipe-link"
+						id='recipe-link'
 						label="Recipe's Link"
-						type="text"
+						type='text'
 						value={recipeLink}
 						onChange={(event) => setRecipeLink(event.target.value)}
 						fullWidth
