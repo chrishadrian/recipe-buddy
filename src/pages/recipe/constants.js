@@ -1,4 +1,4 @@
-export const recipes = [
+const recipes = [
 	{
 		id: 1,
 		title: 'Grilled Chicken with Avocado Salsa',
@@ -30,3 +30,5 @@ export const recipes = [
 		image: 'https://oursaltykitchen.com/wp-content/uploads/2020/03/chicken-avocado-salsa-featured-image.jpg',
 	},
 ];
+
+export default recipes;

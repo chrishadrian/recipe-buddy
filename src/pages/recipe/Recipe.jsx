@@ -4,7 +4,7 @@ import { Add } from '@mui/icons-material';
 import RecipeContent from './components/RecipeContent';
 import SearchBar from './components/SearchBar';
 import RecipeDialog from './components/RecipeDialog';
-import { recipes } from './constants';
+import recipes from './constants';
 
 function RecipeList() {
 	const { palette } = useTheme();

@@ -1,6 +1,7 @@
+// eslint-disable-next-line object-curly-newline
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { recipes } from '../constants';
+import recipes from '../constants';
 
 export default function RecipeDialog(props) {
 	const { open, handleClose } = props;
