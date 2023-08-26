@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -30,18 +29,11 @@ const firebaseDevConfig = {
 const app = initializeApp(production ? firebaseProdConfig : firebaseDevConfig);
 getAnalytics(app);
 
-// auth
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
-
-export const auth = getAuth();
-export const signInWithGooglePopUp = () => signInWithPopup(auth, provider);
-
 // firestore
-export const db = getFirestore();
+const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
-	const userDocRef = doc(db, 'users', userAuth.uid);
+const createFirestoreDocument = async (collectionID, document) => {
+	const userDocRef = doc(db, collectionID, document.id);
 	// console.log(userDocRef);
 
 	const userSnapshot = await getDoc(userDocRef);
@@ -50,13 +42,11 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 	// console.log(userSnapshot.exists());
 
 	if (!userSnapshot.exists()) {
-		const { displayName, email } = userAuth;
 		const createdAt = new Date();
 
 		try {
 			await setDoc(userDocRef, {
-				displayName,
-				email,
+				...document,
 				createdAt,
 			});
 		} catch (error) {
@@ -66,3 +56,5 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 
 	return userDocRef;
 };
+
+export default createFirestoreDocument;
