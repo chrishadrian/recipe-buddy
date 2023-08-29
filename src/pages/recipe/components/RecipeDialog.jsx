@@ -23,7 +23,7 @@ export default function RecipeDialog(props) {
 		<Dialog open={open} onClose={handleClose}>
 			<DialogTitle>Add a New Recipe</DialogTitle>
 			<DialogContent>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} className='space-y-4 pt-4'>
 					<TextField
 						autoFocus
 						id='recipe-name'
