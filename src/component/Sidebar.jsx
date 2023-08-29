@@ -8,12 +8,15 @@ import {
 	FitbitOutlined,
 	ArrowCircleLeftOutlined,
 	ArrowCircleRightOutlined,
+	LogoutOutlined,
 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import StyledMenuItem from './StyledMenuItem';
 
 export default function StyledSidebar() {
 	const { collapseSidebar, collapsed } = useProSidebar();
+	const { logout } = useAuth0();
 	return (
 		<Sidebar style={{ height: '100vh' }} backgroundColor='#558B2F'>
 			<Menu>
@@ -31,6 +34,12 @@ export default function StyledSidebar() {
 				</StyledMenuItem>
 				<StyledMenuItem icon={<ShoppingCartOutlined />} component={<Link to='/' />}>
 					Shopping List
+				</StyledMenuItem>
+				<StyledMenuItem
+					icon={<LogoutOutlined />}
+					onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+				>
+					Logout
 				</StyledMenuItem>
 			</Menu>
 			<Menu style={{ position: 'absolute', bottom: '0', width: '100%' }}>
