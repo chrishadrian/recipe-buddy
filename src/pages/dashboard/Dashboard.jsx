@@ -12,7 +12,8 @@ export default function Dashboard() {
 	useEffect(() => {
 		console.log('User: ', user);
 		if (user) {
-			setUsername(user.name.charAt(0).toUpperCase() + user.name.slice(1));
+			const tempUsername = user.name.split(' ');
+			setUsername(tempUsername[0].charAt(0).toUpperCase() + tempUsername[0].slice(1));
 		}
 	}, [user]);
 	return (
