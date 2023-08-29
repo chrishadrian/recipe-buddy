@@ -3,7 +3,7 @@ import { Box, Button, SpeedDialIcon } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export default function Landing() {
-	const { loginWithRedirect } = useAuth0();
+	const { loginWithRedirect, logout } = useAuth0();
 
 	return (
 		<Box className='flex h-full w-full flex-col items-center justify-center bg-gray-50 dark:bg-gray-800'>
@@ -17,7 +17,12 @@ export default function Landing() {
 					<Button variant='contained' onClick={() => loginWithRedirect()}>
 						Login
 					</Button>
-					<Button variant='contained'>Logout</Button>
+					<Button
+						variant='contained'
+						onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+					>
+						Logout
+					</Button>
 				</Box>
 			</Box>
 		</Box>
