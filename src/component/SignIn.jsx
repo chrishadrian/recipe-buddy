@@ -1,15 +1,17 @@
-import { createUserDocumentFromAuth, signInWithGooglePopUp } from '../utils/firebase';
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function SignIn() {
-	const logGoogleUser = async () => {
-		const { user } = await signInWithGooglePopUp();
-		await createUserDocumentFromAuth(user);
-	};
+	const { loginWithRedirect, logout } = useAuth0();
+
 	return (
-		<div>
+		<div className='flex justify-between w-1/5'>
 			<h1>Sign In Page</h1>
-			<button type='button' onClick={logGoogleUser}>
-				Sign in with Google Popup
+			<button type='button' onClick={() => loginWithRedirect()}>
+				Login
+			</button>
+			<button type='button' onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+				Logout
 			</button>
 		</div>
 	);
