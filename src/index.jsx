@@ -13,7 +13,7 @@ root.render(
 		<ThemeProvider theme={theme}>
 			<Auth0Provider
 				domain='dev-10xrgme543niaw5t.us.auth0.com'
-				clientId='2eOhiAykFqkCwORSbDgobV0Rks3FfR35'
+				clientId={process.env.REACT_APP_AUTH0_CLIENTID}
 				authorizationParams={{ redirect_uri: window.location.origin }}
 			>
 				<ProSidebarProvider>
