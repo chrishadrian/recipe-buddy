@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import RecipeTable from './components/RecipeTable';
 import ShoppingList from './components/ShoppingList';
-import SignIn from '../../component/SignIn';
 
 export default function Dashboard() {
 	const { user } = useAuth0();
@@ -28,9 +27,6 @@ export default function Dashboard() {
 				<Box className='w-1/4 max-h-[439px]'>
 					<ShoppingList />
 				</Box>
-			</Box>
-			<Box>
-				<SignIn />
 			</Box>
 		</Box>
 	);
