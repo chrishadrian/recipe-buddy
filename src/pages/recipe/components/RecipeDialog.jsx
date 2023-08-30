@@ -1,22 +1,30 @@
 // eslint-disable-next-line object-curly-newline
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import recipes from '../constants';
 
 export default function RecipeDialog(props) {
-	const { open, handleClose } = props;
+	const { open, setOpen, recipes } = props;
 	const [recipeName, setRecipeName] = useState('');
 	const [recipeDescription, setRecipeDescription] = useState('');
 	const [recipeLink, setRecipeLink] = useState('');
 
+	const handleClose = () => {
+		setOpen(false);
+	};
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		recipes.push({
-			id: recipes.length() + 1,
+			id: recipes.length + 1,
 			title: recipeName,
 			description: recipeDescription,
 			link: recipeLink,
 		});
+
+		setRecipeName('');
+		setRecipeDescription('');
+		setRecipeLink('');
+		setOpen(false);
 	};
 
 	return (

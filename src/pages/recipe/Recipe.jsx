@@ -11,14 +11,6 @@ function RecipeList() {
 	const [filteredRecipes, setFilteredRecipes] = useState(recipes);
 	const [open, setOpen] = useState(false);
 
-	const handleOpen = () => {
-		setOpen(true);
-	};
-
-	const handleClose = () => {
-		setOpen(false);
-	};
-
 	return (
 		<div className='flex flex-col m-5 mx-14 w-full'>
 			<Typography variant='h4' sx={{ mb: 2 }}>
@@ -29,14 +21,16 @@ function RecipeList() {
 				<Button
 					variant='contained'
 					startIcon={<Add />}
-					onClick={handleOpen}
+					onClick={() => {
+						setOpen(true);
+					}}
 					sx={{ borderRadius: '20px', width: '10rem', mr: 2 }}
 				>
 					Add Recipe
 				</Button>
 			</Box>
 			<RecipeContent filteredRecipes={filteredRecipes} palette={palette} />
-			<RecipeDialog open={open} handleClose={handleClose} />
+			<RecipeDialog open={open} setOpen={setOpen} recipes={recipes} />
 		</div>
 	);
 }
