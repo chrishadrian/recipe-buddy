@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './RecipeContent.css';
 import { InstagramEmbed } from 'react-social-media-embed';
 // eslint-disable-next-line prettier/prettier
@@ -8,15 +8,18 @@ import {
 
 export default function RecipeContent(props) {
 	const { filteredRecipes, palette } = props;
-
+	const [selectedRecipe, setSelectedRecipe] = useState(null);
 	return (
 		<Box className='flex my-4 h-4/5'>
 			<Box className='w-1/3 flex'>
-				<InstagramEmbed
-					url='https://www.instagram.com/p/CGGG-S3p_CB/?hl=en'
-					width='85%'
-					style={{ overflow: 'auto', direction: 'rtl' }}
-				/>
+				{selectedRecipe && (
+					<InstagramEmbed
+						url={selectedRecipe.link}
+						width='85%'
+						style={{ overflow: 'auto', direction: 'rtl' }}
+						key={selectedRecipe.link}
+					/>
+				)}
 			</Box>
 			<Box className='w-2/3'>
 				<Grid container spacing={3} height='40vh'>
@@ -31,7 +34,11 @@ export default function RecipeContent(props) {
 									'&:hover': {
 										transform: 'translateY(-5px)',
 										boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.25)',
+										cursor: 'pointer',
 									},
+								}}
+								onClick={() => {
+									setSelectedRecipe(recipe);
 								}}
 							>
 								<CardMedia
