@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -6,9 +6,14 @@ import Dashboard from './pages/dashboard/Dashboard';
 import StyledSidebar from './component/Sidebar';
 import Recipe from './pages/recipe/Recipe';
 import Landing from './pages/Landing';
+import addNewUser from './utils/firebase/user';
 
 function App() {
-	const { isAuthenticated } = useAuth0();
+	const { user, isAuthenticated } = useAuth0();
+
+	useEffect(() => {
+		addNewUser(user);
+	}, [user]);
 	return (
 		<Router>
 			<div style={{ height: '100vh', display: 'flex' }}>

@@ -9,7 +9,6 @@ export default function Dashboard() {
 	const [username, setUsername] = useState('');
 
 	useEffect(() => {
-		console.log('User: ', user);
 		if (user) {
 			const tempUsername = user.name.split(' ');
 			setUsername(tempUsername[0].charAt(0).toUpperCase() + tempUsername[0].slice(1));

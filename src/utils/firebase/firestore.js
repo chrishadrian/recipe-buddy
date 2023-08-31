@@ -24,9 +24,18 @@ const createFirestoreDocument = async (collectionID, document) => {
 		} catch (error) {
 			console.error('Error creating the user', error.message);
 		}
+
+		return true;
 	}
 
-	return userDocRef;
+	return false;
 };
 
-export default createFirestoreDocument;
+const getFirestoreDocument = async (collectionID, document) => {
+	const userDocRef = doc(db, collectionID, document.id);
+	const userSnapshot = await getDoc(userDocRef);
+
+	return userSnapshot;
+};
+
+export { createFirestoreDocument, getFirestoreDocument };
