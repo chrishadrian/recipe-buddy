@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const production = process.env.NODE_ENV === 'prod';
@@ -29,32 +28,4 @@ const firebaseDevConfig = {
 const app = initializeApp(production ? firebaseProdConfig : firebaseDevConfig);
 getAnalytics(app);
 
-// firestore
-const db = getFirestore();
-
-const createFirestoreDocument = async (collectionID, document) => {
-	const userDocRef = doc(db, collectionID, document.id);
-	// console.log(userDocRef);
-
-	const userSnapshot = await getDoc(userDocRef);
-	// console.log(userSnapshot);
-	// check if the data exists in the database
-	// console.log(userSnapshot.exists());
-
-	if (!userSnapshot.exists()) {
-		const createdAt = new Date();
-
-		try {
-			await setDoc(userDocRef, {
-				...document,
-				createdAt,
-			});
-		} catch (error) {
-			console.error('Error creating the user', error.message);
-		}
-	}
-
-	return userDocRef;
-};
-
-export default createFirestoreDocument;
+export default app;
