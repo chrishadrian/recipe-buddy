@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import app from './firebase';
 
