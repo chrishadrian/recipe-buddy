@@ -1,6 +1,7 @@
 // eslint-disable-next-line object-curly-newline
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import generateImage from '../../../utils/openai';
 
 export default function RecipeDialog(props) {
 	const { open, setOpen, recipes } = props;
@@ -12,12 +13,17 @@ export default function RecipeDialog(props) {
 		setOpen(false);
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
+
+		const imageURL = generateImage('A bowl of pesto pasta salad');
+		console.log('image_url: ', imageURL);
+
 		recipes.push({
 			id: recipes.length + 1,
 			title: recipeName,
 			description: recipeDescription,
+			image: imageURL,
 			link: recipeLink,
 		});
 
