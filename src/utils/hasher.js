@@ -1,7 +1,7 @@
-import getUuidByString from 'uuid-by-string';
+import { SHA256 } from 'crypto-js';
 
 export default function generateUserID(userAuth) {
-	const uuidHash = getUuidByString(userAuth.email, userAuth.name + userAuth.email + userAuth.locale);
-
-	return uuidHash;
+	const secret = userAuth.name + userAuth.email + userAuth.locale;
+	const hashedValue = SHA256(secret).toString();
+	return hashedValue;
 }
