@@ -17,7 +17,6 @@ export default function RecipeDialog(props) {
 		event.preventDefault();
 
 		const imageURL = generateImage('A bowl of pesto pasta salad');
-		console.log('image_url: ', imageURL);
 
 		recipes.push({
 			id: recipes.length + 1,
