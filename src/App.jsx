@@ -12,7 +12,7 @@ function App() {
 	const { user, isAuthenticated } = useAuth0();
 
 	useEffect(() => {
-		addNewUser(user);
+		if (user) addNewUser(user);
 	}, [user]);
 	return (
 		<Router>
