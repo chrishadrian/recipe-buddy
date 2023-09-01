@@ -1,5 +1,5 @@
-import generateUserID from '../hasher';
-import { createFirestoreDocument } from './firestore';
+import { generateUserID } from '../hasher';
+import { createUserDocument } from './firestore';
 
 const addNewUser = async (user) => {
 	const { name, email, locale } = user;
@@ -11,7 +11,7 @@ const addNewUser = async (user) => {
 		locale,
 	};
 
-	const userDocRef = await createFirestoreDocument('users', userDoc);
+	const userDocRef = await createUserDocument('users', userDoc);
 
 	return userDocRef;
 };
