@@ -1,18 +1,14 @@
 /* eslint-disable no-console */
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import app from './firebase';
+import { generateUserID } from '../hasher';
 
 // firestore
 const db = getFirestore(app);
 
-const createFirestoreDocument = async (collectionID, document) => {
+const createUserDocument = async (collectionID, document) => {
 	const userDocRef = doc(db, collectionID, document.id);
-	// console.log(userDocRef);
-
 	const userSnapshot = await getDoc(userDocRef);
-	// console.log(userSnapshot);
-	// check if the data exists in the database
-	// console.log(userSnapshot.exists());
 
 	if (!userSnapshot.exists()) {
 		const createdAt = new Date();
@@ -32,11 +28,34 @@ const createFirestoreDocument = async (collectionID, document) => {
 	return false;
 };
 
-const getFirestoreDocument = async (collectionID, document) => {
+const getUserDocument = async (collectionID, document) => {
 	const userDocRef = doc(db, collectionID, document.id);
 	const userSnapshot = await getDoc(userDocRef);
 
 	return userSnapshot;
 };
 
-export { createFirestoreDocument, getFirestoreDocument };
+const createSubCollectionDocument = async (user, subCollection, subDocument) => {
+	const createdAt = new Date();
+	const userID = generateUserID(user);
+
+	const docRef = doc(db, 'users', userID, subCollection, subDocument.id);
+	const snapshot = await getDoc(docRef);
+
+	if (!snapshot.exists()) {
+		try {
+			await setDoc(docRef, {
+				...subDocument,
+				createdAt,
+			});
+		} catch (error) {
+			console.error('Error creating user document', error.message);
+		}
+
+		return true;
+	}
+
+	return false;
+};
+
+export { createUserDocument, getUserDocument, createSubCollectionDocument };

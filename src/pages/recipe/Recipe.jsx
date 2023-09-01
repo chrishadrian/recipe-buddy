@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Typography, useTheme } from '@mui/material';
 import { Add } from '@mui/icons-material';
+import { useAuth0 } from '@auth0/auth0-react';
 import RecipeContent from './components/RecipeContent';
 import SearchBar from './components/SearchBar';
 import RecipeDialog from './components/RecipeDialog';
@@ -8,6 +9,7 @@ import recipes from './constants';
 
 function RecipeList() {
 	const { palette } = useTheme();
+	const { user } = useAuth0();
 	const [filteredRecipes, setFilteredRecipes] = useState(recipes);
 	const [open, setOpen] = useState(false);
 
@@ -30,7 +32,7 @@ function RecipeList() {
 				</Button>
 			</Box>
 			<RecipeContent filteredRecipes={filteredRecipes} palette={palette} />
-			<RecipeDialog open={open} setOpen={setOpen} recipes={recipes} />
+			<RecipeDialog open={open} setOpen={setOpen} user={user} />
 		</div>
 	);
 }
