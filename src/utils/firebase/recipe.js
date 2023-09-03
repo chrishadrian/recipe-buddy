@@ -1,5 +1,5 @@
 import { generateRecipeID } from '../hasher';
-import { createSubCollectionDocument } from './firestore';
+import { createSubCollectionDocument, getSubCollectionDocuments } from './firestore';
 
 const addNewRecipe = async (user, recipe) => {
 	const { title, description, image, link } = recipe;
@@ -16,4 +16,10 @@ const addNewRecipe = async (user, recipe) => {
 
 	return userDocRef;
 };
-export default addNewRecipe;
+
+const getRecipes = async (user) => {
+	const recipeDocs = await getSubCollectionDocuments(user, 'recipes');
+
+	return recipeDocs;
+};
+export { addNewRecipe, getRecipes };

@@ -1,11 +1,11 @@
 // eslint-disable-next-line object-curly-newline
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import addNewRecipe from '../../../utils/firebase/recipe';
+import { addNewRecipe } from '../../../utils/firebase/recipe';
 // import generateImage from '../../../utils/openai';
 
 export default function RecipeDialog(props) {
-	const { open, setOpen, user } = props;
+	const { user, open, setOpen, setIsNewRecipe } = props;
 	const [recipeName, setRecipeName] = useState('');
 	const [recipeDescription, setRecipeDescription] = useState('');
 	const [recipeLink, setRecipeLink] = useState('');
@@ -26,8 +26,9 @@ export default function RecipeDialog(props) {
 			link: recipeLink,
 		};
 
-		addNewRecipe(user, recipe);
+		await addNewRecipe(user, recipe);
 
+		setIsNewRecipe(true);
 		setRecipeName('');
 		setRecipeDescription('');
 		setRecipeLink('');

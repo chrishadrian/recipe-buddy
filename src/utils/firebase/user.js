@@ -11,7 +11,7 @@ const addNewUser = async (user) => {
 		locale,
 	};
 
-	const userDocRef = await createUserDocument('users', userDoc);
+	const userDocRef = await createUserDocument(userDoc);
 
 	return userDocRef;
 };
