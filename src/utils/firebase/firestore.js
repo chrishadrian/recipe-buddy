@@ -1,13 +1,15 @@
 /* eslint-disable no-console */
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, collection, query, getDocs } from 'firebase/firestore';
 import app from './firebase';
 import { generateUserID } from '../hasher';
 
 // firestore
 const db = getFirestore(app);
 
-const createUserDocument = async (collectionID, document) => {
-	const userDocRef = doc(db, collectionID, document.id);
+const createUserDocument = async (user) => {
+	const userID = generateUserID(user);
+
+	const userDocRef = doc(db, 'users', userID);
 	const userSnapshot = await getDoc(userDocRef);
 
 	if (!userSnapshot.exists()) {
@@ -15,7 +17,7 @@ const createUserDocument = async (collectionID, document) => {
 
 		try {
 			await setDoc(userDocRef, {
-				...document,
+				...user,
 				createdAt,
 			});
 		} catch (error) {
@@ -28,11 +30,13 @@ const createUserDocument = async (collectionID, document) => {
 	return false;
 };
 
-const getUserDocument = async (collectionID, document) => {
-	const userDocRef = doc(db, collectionID, document.id);
+const getUserDocument = async (user) => {
+	const userID = generateUserID(user);
+
+	const userDocRef = doc(db, 'users', userID);
 	const userSnapshot = await getDoc(userDocRef);
 
-	return userSnapshot;
+	return userSnapshot.data();
 };
 
 const createSubCollectionDocument = async (user, subCollection, subDocument) => {
@@ -58,4 +62,19 @@ const createSubCollectionDocument = async (user, subCollection, subDocument) => 
 	return false;
 };
 
-export { createUserDocument, getUserDocument, createSubCollectionDocument };
+const getSubCollectionDocuments = async (user, subCollection) => {
+	const userID = generateUserID(user);
+	const documents = [];
+
+	const subCollectionRef = collection(db, 'users', userID, subCollection);
+	const q = query(subCollectionRef);
+	const querySnapshot = await getDocs(q);
+
+	querySnapshot.forEach((data) => {
+		documents.unshift(data.data());
+	});
+
+	return documents;
+};
+
+export { createUserDocument, getUserDocument, createSubCollectionDocument, getSubCollectionDocuments };
