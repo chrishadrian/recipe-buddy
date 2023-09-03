@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import './RecipeContent.css';
 import { InstagramEmbed } from 'react-social-media-embed';
-// eslint-disable-next-line prettier/prettier
-import {
-	Box, Card, CardContent, CardMedia, Grid, Typography,
-} from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 
 export default function RecipeContent(props) {
 	const { filteredRecipes, palette } = props;

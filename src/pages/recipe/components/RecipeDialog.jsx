@@ -1,4 +1,3 @@
-// eslint-disable-next-line object-curly-newline
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { addNewRecipe } from '../../../utils/firebase/recipe';
