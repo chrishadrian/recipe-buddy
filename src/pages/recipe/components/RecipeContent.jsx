@@ -105,9 +105,21 @@ export default function RecipeContent(props) {
 										<IconButton aria-label='options' onClick={handleMenuOpen}>
 											<MoreHorizIcon />
 										</IconButton>
-										<Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-											<MenuItem onClick={() => handleUpdateCard(recipe)}>Update Card</MenuItem>
-											<MenuItem onClick={() => handleDeleteCard(recipe)}>Delete Card</MenuItem>
+										<Menu
+											anchorEl={anchorEl}
+											open={Boolean(anchorEl)}
+											onClose={handleMenuClose}
+											anchorOrigin={{
+												vertical: 'top',
+												horizontal: 'left',
+											}}
+											transformOrigin={{
+												vertical: 'top',
+												horizontal: 'left',
+											}}
+										>
+											<MenuItem onClick={handleUpdateCard}>Update Card</MenuItem>
+											<MenuItem onClick={handleDeleteCard}>Delete Card</MenuItem>
 										</Menu>
 									</Box>
 									<Typography variant='body2' component='p' sx={{ color: `${palette.primary.main}` }}>
