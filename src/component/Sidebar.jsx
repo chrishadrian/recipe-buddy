@@ -21,7 +21,7 @@ export default function StyledSidebar() {
 		<Sidebar style={{ height: '100vh' }} backgroundColor='#558B2F'>
 			<Menu>
 				<StyledMenuItem icon={<FitbitOutlined fontSize='large' sx={{ color: '#85FFBD' }} />} className='my-3'>
-					<h2 className='title'>Fit Tracker</h2>
+					<h2 className='title'>Recipe Buddy</h2>
 				</StyledMenuItem>
 				<StyledMenuItem icon={<DashboardOutlined />} component={<Link to='/' />}>
 					Dashboard
