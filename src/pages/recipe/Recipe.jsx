@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography, useTheme } from '@mui/material';
 import { Add } from '@mui/icons-material';
+import { useAuth0 } from '@auth0/auth0-react';
 import RecipeContent from './components/RecipeContent';
 import SearchBar from './components/SearchBar';
 import RecipeDialog from './components/RecipeDialog';
-import recipes from './constants';
+import { getRecipes } from '../../utils/firebase/recipe';
 
 function RecipeList() {
 	const { palette } = useTheme();
+	const { user } = useAuth0();
+	const [recipes, setRecipes] = useState(null);
 	const [filteredRecipes, setFilteredRecipes] = useState(recipes);
 	const [open, setOpen] = useState(false);
+	const [isNewRecipe, setIsNewRecipe] = useState(false);
+
+	useEffect(() => {
+		const firebaseRecipes = getRecipes(user);
+
+		firebaseRecipes.then((result) => {
+			setRecipes(result);
+			setFilteredRecipes(result);
+		});
+	}, [user, isNewRecipe]);
 
 	return (
 		<div className='flex flex-col m-5 mx-14 w-full'>
@@ -29,8 +42,8 @@ function RecipeList() {
 					Add Recipe
 				</Button>
 			</Box>
-			<RecipeContent filteredRecipes={filteredRecipes} palette={palette} />
-			<RecipeDialog open={open} setOpen={setOpen} recipes={recipes} />
+			{filteredRecipes && <RecipeContent filteredRecipes={filteredRecipes} palette={palette} />}
+			<RecipeDialog user={user} open={open} setOpen={setOpen} setIsNewRecipe={setIsNewRecipe} />
 		</div>
 	);
 }

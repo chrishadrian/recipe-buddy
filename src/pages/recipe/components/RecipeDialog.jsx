@@ -1,10 +1,10 @@
-// eslint-disable-next-line object-curly-newline
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import generateImage from '../../../utils/openai';
+import { addNewRecipe } from '../../../utils/firebase/recipe';
+// import generateImage from '../../../utils/openai';
 
 export default function RecipeDialog(props) {
-	const { open, setOpen, recipes } = props;
+	const { user, open, setOpen, setIsNewRecipe } = props;
 	const [recipeName, setRecipeName] = useState('');
 	const [recipeDescription, setRecipeDescription] = useState('');
 	const [recipeLink, setRecipeLink] = useState('');
@@ -16,16 +16,18 @@ export default function RecipeDialog(props) {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		const imageURL = generateImage('A bowl of pesto pasta salad');
+		// const imageURL = generateImage('A bowl of pesto pasta salad');
 
-		recipes.push({
-			id: recipes.length + 1,
+		const recipe = {
 			title: recipeName,
 			description: recipeDescription,
-			image: imageURL,
+			image: 'https://cookieandkate.com/images/2016/10/pesto-pasta-salad-recipe-1.jpg',
 			link: recipeLink,
-		});
+		};
 
+		await addNewRecipe(user, recipe);
+
+		setIsNewRecipe(true);
 		setRecipeName('');
 		setRecipeDescription('');
 		setRecipeLink('');

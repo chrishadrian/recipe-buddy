@@ -1,25 +1,23 @@
 /* eslint-disable no-console */
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, collection, query, getDocs } from 'firebase/firestore';
 import app from './firebase';
+import { generateUserID } from '../hasher';
 
 // firestore
 const db = getFirestore(app);
 
-const createFirestoreDocument = async (collectionID, document) => {
-	const userDocRef = doc(db, collectionID, document.id);
-	// console.log(userDocRef);
+const createUserDocument = async (user) => {
+	const userID = generateUserID(user);
 
+	const userDocRef = doc(db, 'users', userID);
 	const userSnapshot = await getDoc(userDocRef);
-	// console.log(userSnapshot);
-	// check if the data exists in the database
-	// console.log(userSnapshot.exists());
 
 	if (!userSnapshot.exists()) {
 		const createdAt = new Date();
 
 		try {
 			await setDoc(userDocRef, {
-				...document,
+				...user,
 				createdAt,
 			});
 		} catch (error) {
@@ -32,11 +30,51 @@ const createFirestoreDocument = async (collectionID, document) => {
 	return false;
 };
 
-const getFirestoreDocument = async (collectionID, document) => {
-	const userDocRef = doc(db, collectionID, document.id);
+const getUserDocument = async (user) => {
+	const userID = generateUserID(user);
+
+	const userDocRef = doc(db, 'users', userID);
 	const userSnapshot = await getDoc(userDocRef);
 
-	return userSnapshot;
+	return userSnapshot.data();
 };
 
-export { createFirestoreDocument, getFirestoreDocument };
+const createSubCollectionDocument = async (user, subCollection, subDocument) => {
+	const createdAt = new Date();
+	const userID = generateUserID(user);
+
+	const docRef = doc(db, 'users', userID, subCollection, subDocument.id);
+	const snapshot = await getDoc(docRef);
+
+	if (!snapshot.exists()) {
+		try {
+			await setDoc(docRef, {
+				...subDocument,
+				createdAt,
+			});
+		} catch (error) {
+			console.error('Error creating user document', error.message);
+		}
+
+		return true;
+	}
+
+	return false;
+};
+
+const getSubCollectionDocuments = async (user, subCollection) => {
+	const userID = generateUserID(user);
+	const documents = [];
+
+	const subCollectionRef = collection(db, 'users', userID, subCollection);
+	const q = query(subCollectionRef);
+	const querySnapshot = await getDocs(q);
+
+	querySnapshot.forEach((data) => {
+		documents.unshift(data.data());
+	});
+
+	return documents;
+};
+
+export { createUserDocument, getUserDocument, createSubCollectionDocument, getSubCollectionDocuments };
